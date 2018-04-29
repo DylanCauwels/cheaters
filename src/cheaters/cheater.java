@@ -14,14 +14,14 @@ public class cheater {
      * cheater runs through all the documents in the given fileset, checks them against each other and puts the amount
      * of concurrencies for each pairing into the database array which is sized at the start of the method.
      * @param documents the number of documents in the array
-     * @param docNames a String array of all the filenames of the documents located in the package
+     * @param docs a File array of all the filenames of the documents located in the package
      */
-    public cheater(int documents, String[] docNames) {
+    public cheater(int documents, File[] docs) {
         database = new int[documents][documents];
         fileComparator comparator = new fileComparator();
-        for(int i = 2; i < docNames.length; i++) {
-            for(int j = i + 1; j < docNames.length; j++) {
-                database[i][j] = comparator.compare(new File(docNames[i]), new File(docNames[j]));
+        for(int i = 0; i < docs.length; i++) {
+            for(int j = i + 1; j < docs.length; j++) {
+                database[i][j] = comparator.compare(docs[i], docs[j]);
             }
         }
     }
@@ -58,7 +58,7 @@ public class cheater {
                     }
                 }
                 return conflicts;
-            } catch (FileNotFoundException a) {
+            } catch (FileNotFoundException | NullPointerException a) {
                 a.printStackTrace();
             }
             return -1;
