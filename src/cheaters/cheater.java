@@ -26,19 +26,39 @@ public class cheater {
         }
     }
 
+    /**
+     *
+     * @return the 2D matrix of registered 6-word similarities
+     */
     public int[][] getDatabase() {
         return database;
     }
 
+
     class fileComparator {
+        //TODO multiple compare calls will require that similarities be reallocated every run to prevent saturation from other file calls
         HashMap<Integer, String> similarities = new HashMap<>();
 
+        /**
+         * takes two files and runs them. The first run of parseFile puts the keys and values into the similarities
+         * HashMap, and the second returns the collisions that occurred in the hashmap when the second file was put in
+         * @param fileA first file to be run
+         * @param fileB second file to be run
+         * @return amount of collisions in the second run with the first run
+         */
         public int compare(File fileA, File fileB) {
             parseFile(fileA);
             return parseFile(fileB);
 
         }
 
+        /**
+         * parseFile uses a string builder to construct all 6-word segments of a given file and puts them into the collisions
+         * HashMap. If there are any collisions it represents them in the returned conflicts variable. If only one file is run
+         * through the method then conflicts will always return 0.
+         * @param file the file to be parsed and inserted into the hashmap
+         * @return the number of conflicts in the hashmap
+         */
         private int parseFile(File file) {
             int conflicts = 0;
             try {
@@ -64,6 +84,12 @@ public class cheater {
             return -1;
         }
 
+        /**
+         * morethan6 counts the number of spaces in a string and returns true if it has more than 5 (meaning it has
+         * more than 6 words
+         * @param string the string to be tested
+         * @return
+         */
         private boolean moreThan6(String string) {
             int counter = 0;
             for(int i = 0; i < string.length(); i++) {
@@ -74,6 +100,12 @@ public class cheater {
             return counter > 5;
         }
 
+        /**
+         * first space finds the index value of the first space in the string so that the stringBuilder can remove the
+         * first word from the string
+         * @param string the string to be tested
+         * @return the index of the first space in the string
+         */
         private int firstSpace(String string) {
             int index = 0;
             char indexedChar = string.charAt(index);
@@ -84,6 +116,11 @@ public class cheater {
             return index;
         }
 
+        /**
+         * stringToKey calculates the key value for the hashmap by adding up all the characters in the string
+         * @param string the string to be calculated
+         * @return the key of the string to be entered into the hashmap
+         */
         private int stringToKey(String string) {
             int sum = 0;
             for(int i = 0; i < string.length(); i++) {
