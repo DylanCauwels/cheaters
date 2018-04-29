@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df964b6f-27d3-4173-ab30-8fe9e4e6852e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Cheaters (7)/cheaters/cheater$fileComparator.class" afterPath="$PROJECT_DIR$/out/production/Cheaters (7)/cheaters/cheater$fileComparator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Cheaters (7)/cheaters/cheater.class" afterPath="$PROJECT_DIR$/out/production/Cheaters (7)/cheaters/cheater.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Cheaters (7)/cheaters/cheaterController.class" afterPath="$PROJECT_DIR$/out/production/Cheaters (7)/cheaters/cheaterController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output.txt" afterPath="$PROJECT_DIR$/output.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cheaters/cheater.java" afterPath="$PROJECT_DIR$/src/cheaters/cheater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cheaters/cheaterController.java" afterPath="$PROJECT_DIR$/src/cheaters/cheaterController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="cheaterController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cheaterController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cheaters/cheaterController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="325">
+              <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -35,23 +30,23 @@
       <file leaf-file-name="output.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/output.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="-103">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cheater.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="cheater.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cheaters/cheater.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="829">
-              <caret line="177" column="0" lean-forward="true" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
+            <state relative-caret-position="415">
+              <caret line="95" column="23" lean-forward="false" selection-start-line="95" selection-start-column="23" selection-end-line="95" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1770#1771#0" expanded="true" />
                 <element signature="e#1797#1798#0" expanded="true" />
-                <marker date="1525044048408" expanded="true" signature="1826:6777" ph="{...}" />
+                <marker date="1525045303348" expanded="true" signature="1826:5178" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -81,9 +76,9 @@
         <option value="$PROJECT_DIR$/srinjoy_testing/test" />
         <option value="$PROJECT_DIR$/srinjoy_testing/test2" />
         <option value="$PROJECT_DIR$/srinjoy_testing/test3" />
-        <option value="$PROJECT_DIR$/src/cheaters/cheater.java" />
         <option value="$PROJECT_DIR$/src/cheaters/cheaterController.java" />
         <option value="$PROJECT_DIR$/output.txt" />
+        <option value="$PROJECT_DIR$/src/cheaters/cheater.java" />
       </list>
     </option>
   </component>
@@ -241,12 +236,12 @@
       <workItem from="1524950196374" duration="8398000" />
       <workItem from="1525026352609" duration="3452000" />
       <workItem from="1525030646576" duration="390000" />
-      <workItem from="1525031661307" duration="11188000" />
+      <workItem from="1525031661307" duration="11845000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23428000" />
+    <option name="totallyTimeSpent" value="24085000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -359,7 +354,7 @@
             <element signature="imports" expanded="true" />
             <element signature="e#1770#1771#0" expanded="true" />
             <element signature="e#1797#1798#0" expanded="true" />
-            <marker date="1525044048408" expanded="true" signature="1826:6777" ph="{...}" />
+            <marker date="1525045303348" expanded="true" signature="1826:5178" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -390,7 +385,7 @@
             <element signature="imports" expanded="true" />
             <element signature="e#1770#1771#0" expanded="true" />
             <element signature="e#1797#1798#0" expanded="true" />
-            <marker date="1525044048408" expanded="true" signature="1826:6777" ph="{...}" />
+            <marker date="1525045303348" expanded="true" signature="1826:5178" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -413,7 +408,7 @@
             <element signature="imports" expanded="true" />
             <element signature="e#1770#1771#0" expanded="true" />
             <element signature="e#1797#1798#0" expanded="true" />
-            <marker date="1525044048408" expanded="true" signature="1826:6777" ph="{...}" />
+            <marker date="1525045303348" expanded="true" signature="1826:5178" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -483,33 +478,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cheaters/cheater.java">
+    <entry file="file://$PROJECT_DIR$/src/cheaters/cheaterController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="829">
-          <caret line="177" column="0" lean-forward="true" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
+        <state relative-caret-position="325">
+          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1770#1771#0" expanded="true" />
-            <element signature="e#1797#1798#0" expanded="true" />
-            <marker date="1525044048408" expanded="true" signature="1826:6777" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/output.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="-103">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cheaters/cheaterController.java">
+    <entry file="file://$PROJECT_DIR$/src/cheaters/cheater.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="415">
+          <caret line="95" column="23" lean-forward="false" selection-start-line="95" selection-start-column="23" selection-end-line="95" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1770#1771#0" expanded="true" />
+            <element signature="e#1797#1798#0" expanded="true" />
+            <marker date="1525045303348" expanded="true" signature="1826:5178" ph="{...}" />
           </folding>
         </state>
       </provider>

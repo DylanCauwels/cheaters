@@ -93,7 +93,7 @@ public class cheater {
                 for(String s: fileB_words){
                     if(fileA_words.contains(s)){
                         conflicts++;
-                    }
+                    }ei
                 }
             }
             return conflicts;
@@ -118,7 +118,7 @@ public class cheater {
                         if(segment.size() > segmentSize){
                             segment.remove(0);
                         }
-                        String parsed = String.join("", segment).replaceAll("[^A-Za-z]+", "").toUpperCase();
+                        String parsed = String.join("", segment).toLowerCase().replaceAll("\\W", "");
                         set.add(parsed);
                     }
                 }
@@ -129,49 +129,5 @@ public class cheater {
             return null;
         }
 
-        /**
-         * morethan6 counts the number of spaces in a string and returns true if it has more than 5 (meaning it has
-         * more than 6 words
-         * @param string the string to be tested
-         * @return
-         */
-        private boolean moreThan6(String string) {
-            int counter = 0;
-            for(int i = 0; i < string.length(); i++) {
-                if(string.charAt(i) == ' ') {
-                    counter++;
-                }
-            }
-            return counter > 5;
-        }
-
-        /**
-         * first space finds the index value of the first space in the string so that the stringBuilder can remove the
-         * first word from the string
-         * @param string the string to be tested
-         * @return the index of the first space in the string
-         */
-        private int firstSpace(String string) {
-            int index = 0;
-            char indexedChar = string.charAt(index);
-            while(indexedChar != ' ') {
-                index++;
-                indexedChar = string.charAt(index);
-            }
-            return index;
-        }
-
-        /**
-         * stringToKey calculates the key value for the hashmap by adding up all the characters in the string
-         * @param string the string to be calculated
-         * @return the key of the string to be entered into the hashmap
-         */
-        private int stringToKey(String string) {
-            int sum = 0;
-            for(int i = 0; i < string.length(); i++) {
-                sum += (int)string.charAt(i);
-            }
-            return sum;
-        }
     }
 }
