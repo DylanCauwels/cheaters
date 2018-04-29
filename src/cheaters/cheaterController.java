@@ -2,43 +2,44 @@ package cheaters;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.io.PrintWriter;
+import java.io.FileOutputStream;
 
 public class cheaterController {
 
     public static void main(String[] args) {
-        File folder = new File("sm_doc_set/");
+        File folder = new File(args[0]);
+        int segmentSize = Integer.parseInt(args[1]);
+        int plagiagrismThreshold = Integer.parseInt(args[2]);
+
         File[] listOfFiles = folder.listFiles();
 
         assert listOfFiles != null;
-//        for (File listOfFile : listOfFiles) {
-//            if (listOfFile.isFile()) {
-//                System.out.println("File " + listOfFile.getName());
-//            } else if (listOfFile.isDirectory()) {
-//                System.out.println("Directory " + listOfFile.getName());
-//            }
-//        }
 
-        Scanner infile = null;
-        try {
-            File a = new File("sm_doc_set/abf0704.txt");
-            infile = new Scanner(a);
-        } catch (FileNotFoundException e) {
-            System.out.println("Dictionary File not Found!");
-            e.printStackTrace();
-            System.exit(1);
-        }
-        while(infile.hasNext()) {
-            System.out.println(infile.next());
+        PrintWriter writer = null;
+        try{
+            writer = new PrintWriter(new FileOutputStream("output.txt", false));
+        }catch(Exception e){
+            //die
         }
 
-//        cheater cheat = new cheater(listOfFiles.length, listOfFiles);
-//        int[][] array = cheat.getDatabase();
-//        for(int i = 0; i < listOfFiles.length; i++) {
-//            for(int j = 0; j < listOfFiles.length; j++) {
-//                System.out.print(array[i][j] + " ");
-//            }
-//            System.out.print("\n");
-//        }
+        cheater cheat = new cheater(listOfFiles.length, listOfFiles, segmentSize);
+        HashMap<Integer, List<String>> map = cheat.getDatabase();
+        SortedSet<Integer> keys = new TreeSet<>(map.keySet()).descendingSet();
+        for (int key : keys) {
+            if(key >= plagiagrismThreshold){
+                writer.println(""+ key + ": "+ map.get(key));
+            }else{
+                break;
+            }
+        }
+        writer.close();
     }
 }

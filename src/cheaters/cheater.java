@@ -1,14 +1,15 @@
 package cheaters;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.Set;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
 
 public class cheater {
     private int[][] database;
-
+    private HashMap<Integer, List<String>> hits;
+    static private HashMap<String, HashSet<String>> fileWords;
 
     /**
      * cheater runs through all the documents in the given fileset, checks them against each other and puts the amount
@@ -16,12 +17,23 @@ public class cheater {
      * @param documents the number of documents in the array
      * @param docs a File array of all the filenames of the documents located in the package
      */
-    public cheater(int documents, File[] docs) {
-        database = new int[documents][documents];
-        fileComparator comparator = new fileComparator();
+    public cheater(int documents, File[] docs, int segmentSize) {
+//        database = new int[documents][documents];
+        hits = new HashMap<Integer, List<String>>();
+        fileWords = new HashMap<String, HashSet<String>>();
         for(int i = 0; i < docs.length; i++) {
             for(int j = i + 1; j < docs.length; j++) {
-                database[i][j] = comparator.compare(docs[i], docs[j]);
+//                database[i][j] = comparator.compare(docs[i], docs[j]);
+                FileComparator comparator = new FileComparator(segmentSize, docs[i], docs[j]);
+                int conflicts = comparator.compare();
+                if (hits.containsKey(conflicts)){
+                    hits.get(conflicts).add(""+i+" "+j+" ");
+                }else{
+                    ArrayList list = new ArrayList();
+                    list.add(""+docs[i].getName()+","+docs[j].getName()+" ");
+                    hits.put(conflicts, list);
+                }
+
             }
         }
     }
@@ -30,14 +42,36 @@ public class cheater {
      *
      * @return the 2D matrix of registered 6-word similarities
      */
-    public int[][] getDatabase() {
-        return database;
+    public HashMap<Integer, List<String>> getDatabase() {
+        return hits;
     }
 
 
-    class fileComparator {
+    class FileComparator {
         //TODO multiple compare calls will require that similarities be reallocated every run to prevent saturation from other file calls
-        HashMap<Integer, String> similarities = new HashMap<>();
+
+        HashSet<String> fileA_words = null;
+        HashSet<String> fileB_words = null;
+        int segmentSize;
+
+        public FileComparator(int N, File fileA, File fileB){
+            segmentSize = N;
+
+            if(fileWords.containsKey(fileA.getName())){
+                fileA_words = fileWords.get(fileA.getName());
+            }else{
+                //Construct hash set for this file
+                fileA_words = parseFile(fileA);
+                fileWords.put(fileA.getName(), fileA_words);
+            }
+            if(fileWords.containsKey(fileB.getName())){
+                fileB_words = fileWords.get(fileB.getName());
+            }else{
+                //Construct hash set for this file
+                fileB_words = parseFile(fileB);
+                fileWords.put(fileB.getName(), fileB_words);
+            }
+        }
 
         /**
          * takes two files and runs them. The first run of parseFile puts the keys and values into the similarities
@@ -46,10 +80,23 @@ public class cheater {
          * @param fileB second file to be run
          * @return amount of collisions in the second run with the first run
          */
-        public int compare(File fileA, File fileB) {
-            parseFile(fileA);
-            return parseFile(fileB);
+        public int compare() {
+            int conflicts = 0;
 
+            if(fileA_words.size()<fileB_words.size()){
+                for(String s: fileA_words){
+                    if(fileB_words.contains(s)){
+                        conflicts++;
+                    }
+                }
+            }else{
+                for(String s: fileB_words){
+                    if(fileA_words.contains(s)){
+                        conflicts++;
+                    }
+                }
+            }
+            return conflicts;
         }
 
         /**
@@ -59,29 +106,27 @@ public class cheater {
          * @param file the file to be parsed and inserted into the hashmap
          * @return the number of conflicts in the hashmap
          */
-        private int parseFile(File file) {
-            int conflicts = 0;
+        private HashSet<String> parseFile(File file) {
             try {
-                Scanner scanner = new Scanner(file);
-                StringBuilder segment = null;
+                HashSet<String> set = new HashSet<String>();
+                Scanner scanner = new Scanner(new BufferedReader(new FileReader(file)));
+                ArrayList<String> segment = new ArrayList<String>();
+
                 while(scanner.hasNext()) {
-                    assert false;
-                    segment.append(scanner.next());
-                    if(moreThan6(segment.toString())) {
-                        //TODO firstSpace may leave a space before the string so it may have to return index++;
-                        segment.delete(0, firstSpace(segment.toString()));
-                    }
-                    if(similarities.get(stringToKey(segment.toString())) == null) {
-                        similarities.put(stringToKey(segment.toString()), segment.toString());
-                    } else {
-                        conflicts++;
+                    segment.add(scanner.next());
+                    if(segment.size()>=segmentSize) {
+                        if(segment.size() > segmentSize){
+                            segment.remove(0);
+                        }
+                        String parsed = String.join("", segment).replaceAll("[^A-Za-z]+", "").toUpperCase();
+                        set.add(parsed);
                     }
                 }
-                return conflicts;
-            } catch (FileNotFoundException | NullPointerException a) {
+                return set;
+            } catch (NullPointerException | IOException a) {
                 a.printStackTrace();
             }
-            return -1;
+            return null;
         }
 
         /**
