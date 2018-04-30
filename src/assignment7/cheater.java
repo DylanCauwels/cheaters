@@ -1,4 +1,4 @@
-package cheaters;
+package assignment7;
 
 import java.io.File;
 import java.io.BufferedReader;
@@ -7,23 +7,25 @@ import java.io.IOException;
 import java.util.*;
 
 public class cheater {
-    private int[][] database;
     private HashMap<Integer, List<String>> hits;
     static private HashMap<String, HashSet<String>> fileWords;
 
     /**
-     * cheater runs through all the documents in the given fileset, checks them against each other and puts the amount
-     * of concurrencies for each pairing into the database array which is sized at the start of the method.
-     * @param documents the number of documents in the array
-     * @param docs a File array of all the filenames of the documents located in the package
+     * default constructor
      */
-    public cheater(int documents, File[] docs, int segmentSize) {
-//        database = new int[documents][documents];
-        hits = new HashMap<Integer, List<String>>();
-        fileWords = new HashMap<String, HashSet<String>>();
+    public cheater() {}
+
+    /**
+     * runStats takes an array of Files along with the specified number of similarities to be considered note-worthy and
+     * compares each file in the list with one another and puts the ones flagged into the hits hashmap
+     * @param docs the array of Files to be checked for plagiarism
+     * @param segmentSize the amount of similarities that will be considered plagiarism
+     */
+    public void runStats(File[] docs, int segmentSize) {
+        hits = new HashMap<>();
+        fileWords = new HashMap<>();
         for(int i = 0; i < docs.length; i++) {
             for(int j = i + 1; j < docs.length; j++) {
-//                database[i][j] = comparator.compare(docs[i], docs[j]);
                 FileComparator comparator = new FileComparator(segmentSize, docs[i], docs[j]);
                 int conflicts = comparator.compare();
                 if (hits.containsKey(conflicts)){
@@ -33,7 +35,6 @@ public class cheater {
                     list.add(""+docs[i].getName()+","+docs[j].getName()+" ");
                     hits.put(conflicts, list);
                 }
-
             }
         }
     }
@@ -48,13 +49,19 @@ public class cheater {
 
 
     class FileComparator {
-        //TODO multiple compare calls will require that similarities be reallocated every run to prevent saturation from other file calls
-
-        HashSet<String> fileA_words = null;
-        HashSet<String> fileB_words = null;
+        HashSet<String> fileA_words;
+        HashSet<String> fileB_words;
         int segmentSize;
 
-        public FileComparator(int N, File fileA, File fileB){
+        /**
+         * FileComparator takes in two files, constructs hashmaps and checks each others hashmaps for similarities. If the amount
+         * of similarities found is above the given segment size 'N', then the compare function when called will return the
+         * number of collisions found
+         * @param N the segment size to be checked against
+         * @param fileA the first file
+         * @param fileB the second file
+         */
+        FileComparator(int N, File fileA, File fileB){
             segmentSize = N;
 
             if(fileWords.containsKey(fileA.getName())){
@@ -76,13 +83,10 @@ public class cheater {
         /**
          * takes two files and runs them. The first run of parseFile puts the keys and values into the similarities
          * HashMap, and the second returns the collisions that occurred in the hashmap when the second file was put in
-         * @param fileA first file to be run
-         * @param fileB second file to be run
          * @return amount of collisions in the second run with the first run
          */
         public int compare() {
             int conflicts = 0;
-
             if(fileA_words.size()<fileB_words.size()){
                 for(String s: fileA_words){
                     if(fileB_words.contains(s)){
@@ -93,7 +97,7 @@ public class cheater {
                 for(String s: fileB_words){
                     if(fileA_words.contains(s)){
                         conflicts++;
-                    }ei
+                    }
                 }
             }
             return conflicts;
@@ -108,9 +112,9 @@ public class cheater {
          */
         private HashSet<String> parseFile(File file) {
             try {
-                HashSet<String> set = new HashSet<String>();
+                HashSet<String> set = new HashSet<>();
                 Scanner scanner = new Scanner(new BufferedReader(new FileReader(file)));
-                ArrayList<String> segment = new ArrayList<String>();
+                ArrayList<String> segment = new ArrayList<>();
 
                 while(scanner.hasNext()) {
                     segment.add(scanner.next());
@@ -128,6 +132,5 @@ public class cheater {
             }
             return null;
         }
-
     }
 }
